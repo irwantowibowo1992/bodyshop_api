@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { model, Schema } = mongoose;
-const ObjectID = mongoose.Schema.Types.ObjectId;
 
 let productSchema = Schema(
   {
@@ -9,6 +8,10 @@ let productSchema = Schema(
       required: [true, 'Name is required'],
       minLength: 3,
       maxLength: 100,
+    },
+    sku: {
+      type: String,
+      required: [true, 'SKU is required'],
     },
     description: {
       type: String,
@@ -24,10 +27,20 @@ let productSchema = Schema(
       required: [true, 'Slug is required'],
       minLength: 6,
     },
+    itemCategory: {
+      type: Schema.Types.ObjectID,
+      required: [true, 'Item category is required'],
+      ref: 'ItemCategory',
+    },
     category: {
       type: Schema.Types.ObjectID,
       required: [true, 'Category is required'],
       ref: 'Category',
+    },
+    subCategory: {
+      type: Schema.Types.ObjectID,
+      required: [true, 'Subcategory is required'],
+      ref: 'SubCategory',
     },
     productImages: [
       {
@@ -41,6 +54,10 @@ let productSchema = Schema(
         },
       },
     ],
+    inStock: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );

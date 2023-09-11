@@ -18,6 +18,29 @@ async function getAllItemCategories() {
               $expr: { $eq: ['$itemCategory', '$$itemCategoryId'] }, // Pencocokan dengan _id ItemCategory
             },
           },
+          {
+            $lookup: {
+              from: 'subcategories', // Nama koleksi 'Category' di database Anda
+              let: { categoryId: '$_id' }, // Variabel lokal untuk menyimpan _id ItemCategory
+              pipeline: [
+                {
+                  $match: {
+                    $expr: { $eq: ['$category', '$$categoryId'] }, // Pencocokan dengan _id ItemCategory
+                  },
+                },
+              ],
+              as: 'subCategories',
+            },
+          },
+          {
+            $project: {
+              _id: 1,
+              name: 1,
+              'subCategories._id': 1,
+              'subCategories.name': 1,
+              'subCategories.description': 1,
+            },
+          },
         ],
         as: 'categories', // Alias untuk hasil lookup
       },
