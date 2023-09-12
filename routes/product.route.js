@@ -8,7 +8,7 @@ router.get('/products', ProductController.getAllProduct);
 router.post(
   '/products',
   auth(['admin']),
-  ValidationMiddleware.validateBody(productValidationSchema.addCategory),
+  ValidationMiddleware.validateBody(productValidationSchema.addProduct),
   ProductController.addNewProduct
 );
 router.get('/products/:id', ProductController.getDetailProduct);

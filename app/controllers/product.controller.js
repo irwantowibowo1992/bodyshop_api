@@ -2,7 +2,8 @@ const productService = require('../services/product.service');
 const SuccessResult = require('../utils/response.util');
 
 async function getAllProduct(req, res) {
-  const data = await productService.getAllProduct();
+  const query = req.query;
+  const data = await productService.getAllProduct(query);
   SuccessResult.make(res).send(data);
 }
 

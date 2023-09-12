@@ -2,11 +2,31 @@ const slugify = require('slugify');
 const Product = require('../models/product.model');
 const SubCategory = require('../models/subCategory.model');
 
-async function getAllProduct() {
-  return Product.find().populate({
-    path: 'category',
-    select: '_id name',
-  });
+async function getAllProduct(query) {
+  const filter = {};
+  filter.price = {};
+
+  const option = {
+    page: query.page,
+    limit: query.size,
+    populate: {
+      path: 'category',
+      select: '_id name',
+    },
+  };
+
+  if (query.priceFrom) {
+    filter.price.$gte = parseInt(query.priceFrom);
+  }
+  if (query.priceTo) {
+    filter.price.$lte = parseInt(query.priceTo);
+  }
+
+  Object.keys(filter).forEach(
+    (key) => filter[key] === undefined && delete filter[key]
+  );
+
+  return Product.paginate({}, option);
 }
 
 async function addNewProduct(data) {
@@ -73,6 +93,13 @@ function generateSKU(productName, subCategory) {
 
   return sku;
 }
+
+// function getPagination(page, size) {
+//   const limit = size ? +size : 3;
+//   const offset = page ? page * limit : 0;
+
+//   return { limit, offset };
+// }
 
 module.exports = {
   getAllProduct,
