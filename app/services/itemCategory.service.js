@@ -10,7 +10,7 @@ async function getAllItemCategories() {
     // },
     {
       $lookup: {
-        from: 'categories', // Nama koleksi 'Category' di database Anda
+        from: 'categories', // Nama koleksi 'Category' di database
         let: { itemCategoryId: '$_id' }, // Variabel lokal untuk menyimpan _id ItemCategory
         pipeline: [
           {
@@ -20,7 +20,7 @@ async function getAllItemCategories() {
           },
           {
             $lookup: {
-              from: 'subcategories', // Nama koleksi 'Category' di database Anda
+              from: 'subcategories', // Nama koleksi 'sub category' di database
               let: { categoryId: '$_id' }, // Variabel lokal untuk menyimpan _id ItemCategory
               pipeline: [
                 {

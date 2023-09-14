@@ -65,4 +65,17 @@ let productSchema = Schema(
 
 productSchema.plugin(mongoosePaginate);
 
+productSchema.methods.calculateAverageRating = async function () {
+  const reviews = await mongoose
+    .model('ProductReview')
+    .find({ product: this._id });
+
+  if (reviews.length === 0) {
+    return 0; // Jika tidak ada ulasan, kembalikan nilai rata-rata 0.
+  }
+
+  const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
+  return totalRating / reviews.length;
+};
+
 module.exports = model('Product', productSchema);

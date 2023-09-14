@@ -88,7 +88,6 @@ async function getDetailOrder(id) {
 }
 
 async function notification(data) {
-  console.log(data);
   const checkOrder = await Order.findOne({ invoice: data.merchant_ref });
 
   if (!checkOrder) {
