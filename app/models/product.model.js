@@ -59,6 +59,9 @@ let productSchema = Schema(
       type: Boolean,
       default: true,
     },
+    weight: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );

@@ -20,9 +20,6 @@ async function getAllReviews(id, { page = 1, size = 10 }) {
     },
   };
 
-  console.log(params);
-  console.log(options);
-
   return ProductReview.paginate(params, options);
 }
 

@@ -11,10 +11,6 @@ class Paginate {
     const skip = (this.page - 1) * this.limit;
     const paginatedResults = this.data.slice(skip, skip + this.limit);
 
-    console.log(this.data.length);
-    console.log(this.limit);
-    console.log(Math.ceil(this.data.length / this.limit));
-
     return {
       docs: paginatedResults,
       totalDocs: this.data.length,

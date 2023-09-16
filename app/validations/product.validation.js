@@ -13,6 +13,7 @@ const productValidationSchema = {
         isMainImage: Joi.boolean(),
       })
       .optional(),
+    weight: Joi.number().required().min(0),
   }),
 };
 

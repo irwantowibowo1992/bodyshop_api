@@ -25,7 +25,6 @@ async function addToCart(user, data) {
   const name = item.name;
 
   if (cart) {
-    console.log(cart);
     const itemIndex = cart.items.findIndex(
       (item) => item.itemId.toString() == data.product_id
     );

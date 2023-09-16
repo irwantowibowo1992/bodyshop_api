@@ -42,7 +42,6 @@ async function login(data) {
 }
 
 async function afterLogin(user, isRemember) {
-  console.log(user._id.toString());
   const paramToken = {
     id: user._id.toString(),
     name: user.name,

@@ -102,6 +102,7 @@ async function addNewProduct(data) {
     itemCategory: category.category.itemCategory._id.toString(),
     category: category.category._id.toString(),
     subCategory: data.subCategory,
+    weight: data.weight,
   };
 
   const images = [];
@@ -113,7 +114,7 @@ async function addNewProduct(data) {
   }
   dataToInsert.productImages = images;
 
-  return await Product.create(dataToInsert);
+  return Product.create(dataToInsert);
 }
 
 async function getDetailProduct(id) {
